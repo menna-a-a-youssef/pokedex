@@ -1,37 +1,31 @@
-import styled from 'styled-components';
-
-import Header from '../../components/Header/Header';
-import LoadMoreButton from '../../components/LoadMoreButton/LoadMoreButton';
-import PokemonGrid from '../../components/PokemonGrid/PokemonGrid';
-
-const PageWrapper = styled.div`
-  min-height: 100vh;
-  background: ${({ theme }) => theme.colors.pageBackgrounds.infinite};
-`;
+import Header from "../../components/Header/Header";
+import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
+import PokemonGrid from "../../components/PokemonGrid/PokemonGrid";
+import { PageWrapper } from "./PokemonInfinite.styles";
 
 const mockPokemon = Array.from({ length: 20 }, (_, index) => ({
   id: index + 1,
   name: [
-    'bulbasaur',
-    'ivysaur',
-    'venusaur',
-    'charmander',
-    'charmeleon',
-    'charizard',
-    'squirtle',
-    'wartortle',
-    'blastoise',
-    'caterpie',
-    'metapod',
-    'butterfree',
-    'weedle',
-    'kakuna',
-    'beedrill',
-    'pidgey',
-    'pidgeotto',
-    'pidgeot',
-    'rattata',
-    'raticate',
+    "bulbasaur",
+    "ivysaur",
+    "venusaur",
+    "charmander",
+    "charmeleon",
+    "charizard",
+    "squirtle",
+    "wartortle",
+    "blastoise",
+    "caterpie",
+    "metapod",
+    "butterfree",
+    "weedle",
+    "kakuna",
+    "beedrill",
+    "pidgey",
+    "pidgeotto",
+    "pidgeot",
+    "rattata",
+    "raticate",
   ][index],
   image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
 }));

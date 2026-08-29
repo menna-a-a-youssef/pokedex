@@ -29,8 +29,8 @@ const Header = ({ activeView, subtitle }: HeaderProps) => {
               <path
                 d="M1.5 13.5L14.5 1.5L13 11H24V14.5L11 26L13 16.5H1.5V13.5Z"
                 stroke="#E2C72B"
-                stroke-width="3"
-                stroke-linejoin="round"
+                strokeWidth="3"
+                strokeLinejoin="round"
               />
             </svg>
           </LogoMark>

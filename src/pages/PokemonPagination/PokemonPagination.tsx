@@ -1,16 +1,12 @@
 import { useState } from "react";
-import styled from "styled-components";
 
 import Header from "../../components/Header/Header";
 import Pagination from "../../components/Pagination/Pagination";
 import PokemonGrid from "../../components/PokemonGrid/PokemonGrid";
+import PokemonListState from "../../components/PokemonListState/PokemonListState";
 import { usePokemonList } from "../../features/pokemon/hooks/usePokemonList";
 import { mapPokemonListItem } from "../../features/pokemon/utils";
-
-const PageWrapper = styled.div`
-  min-height: 100vh;
-  background: ${({ theme }) => theme.colors.pageBackgrounds.pagination};
-`;
+import { PageWrapper } from "./PokemonPagination.styles";
 
 type PokemonPaginationProps = {
   subtitle: string;
@@ -26,7 +22,7 @@ const PokemonPagination = ({ subtitle }: PokemonPaginationProps) => {
     return (
       <PageWrapper>
         <Header activeView="pagination" subtitle={subtitle} />
-        <div>Loading Pokémon…</div>
+        <PokemonListState variant="loading" count={8} />
       </PageWrapper>
     );
   }
@@ -35,12 +31,7 @@ const PokemonPagination = ({ subtitle }: PokemonPaginationProps) => {
     return (
       <PageWrapper>
         <Header activeView="pagination" subtitle={subtitle} />
-        <div>
-          Unable to load Pokémon.
-          <button type="button" onClick={() => refetch()}>
-            Try Again
-          </button>
-        </div>
+        <PokemonListState variant="error" onRetry={() => refetch()} />
       </PageWrapper>
     );
   }
