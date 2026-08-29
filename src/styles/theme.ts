@@ -5,6 +5,7 @@ export const theme = {
     surfaceSoft: "#F7F8FA",
     text: "#1f2430",
     textSecondary: "#737a87",
+    textTertiary: "#864FD5",
     border: "#e4e8ef",
     primary: "#111827",
     success: "#378063",
@@ -14,6 +15,7 @@ export const theme = {
     pageBackgrounds: {
       pagination: "#ecf2fe",
       infinite: "#e9fdf2",
+      details: "#FBEEF8",
     },
   },
 

@@ -1,4 +1,4 @@
-import type { PokemonListItem } from "./types";
+import type { Pokemon, PokemonListItem } from "./types";
 
 export type PokemonCardData = {
   id: number;
@@ -28,4 +28,16 @@ export const mapPokemonListItem = (
     name: pokemon.name,
     image: getPokemonSpriteUrl(id),
   };
+};
+
+export const getPokemonSprite = (pokemon: Pokemon): string | undefined => {
+  const speciesId = pokemon.species?.url
+    ? getPokemonIdFromUrl(pokemon.species.url)
+    : null;
+
+  return (
+    pokemon.sprites?.other?.["official-artwork"]?.front_default ||
+    pokemon.sprites?.front_default ||
+    (speciesId ? getPokemonSpriteUrl(speciesId) : undefined)
+  );
 };
