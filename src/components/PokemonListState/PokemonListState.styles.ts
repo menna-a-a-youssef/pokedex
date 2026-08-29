@@ -59,6 +59,9 @@ export const ErrorWrap = styled.div`
   justify-content: center;
   gap: ${({ theme }) => theme.spacing.lg};
   text-align: center;
+  background: ${({ theme }) => theme.colors.errorBg};
+  border: 1px solid ${({ theme }) => theme.colors.errorBorder};
+  border-radius: ${({ theme }) => theme.radii.md};
 `;
 
 export const ErrorTitle = styled.h2`
@@ -71,19 +74,4 @@ export const ErrorMessage = styled.p`
   margin: 0;
   color: ${({ theme }) => theme.colors.textSecondary};
   font-size: ${({ theme }) => theme.fontSizes.md};
-`;
-
-export const RetryButton = styled.button`
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  background: ${({ theme }) => theme.colors.primary};
-  color: #fff;
-  border-radius: ${({ theme }) => theme.radii.sm};
-  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.lg}`};
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 150ms ease;
-
-  &:hover {
-    opacity: 0.92;
-  }
 `;

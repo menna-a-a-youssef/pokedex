@@ -7,6 +7,10 @@ export const theme = {
     textSecondary: "#737a87",
     border: "#e4e8ef",
     primary: "#111827",
+    success: "#378063",
+    error: "#e11d48",
+    errorBg: "#fef2f2",
+    errorBorder: "#fee2e2",
     pageBackgrounds: {
       pagination: "#ecf2fe",
       infinite: "#e9fdf2",
@@ -21,6 +25,7 @@ export const theme = {
     xl: "20px",
     xxl: "24px",
     xxxl: "32px",
+    xxxxl: "48px",
   },
 
   fontSizes: {

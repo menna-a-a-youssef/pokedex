@@ -1,3 +1,4 @@
+import Button from "../Button/Button";
 import Skeleton from "../Skeleton/Skeleton";
 import {
   Card,
@@ -6,7 +7,6 @@ import {
   ErrorWrap,
   Grid,
   ImageBlock,
-  RetryButton,
   TextRow,
 } from "./PokemonListState.styles";
 
@@ -45,9 +45,8 @@ const PokemonListState = (props: PokemonListStateProps) => {
       <ErrorMessage>
         Something went wrong while fetching the list. Please try again.
       </ErrorMessage>
-      <RetryButton type="button" onClick={props.onRetry}>
-        Try Again
-      </RetryButton>
+
+      <Button onClick={props.onRetry}>Try Again</Button>
     </ErrorWrap>
   );
 };
