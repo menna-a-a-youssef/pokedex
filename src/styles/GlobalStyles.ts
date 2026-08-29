@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -19,6 +19,9 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.text};
     font-family: Arial, sans-serif;
     font-size: 16px;
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+      font-size: 14px;
+    }
   }
 
   #root {
