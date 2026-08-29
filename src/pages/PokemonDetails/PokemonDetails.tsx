@@ -26,15 +26,10 @@ import { pokemonTypeColors } from "../../features/pokemon/pokemonTypeColors";
 import StatBar from "../../components/StatBar/StatBar";
 import { getPokemonSprite } from "../../features/pokemon/utils";
 import placeholderImage from "../../assets/pokemon-placeholder.png";
-import {
-  ErrorWrap,
-  ErrorTitle,
-  ErrorMessage,
-} from "../../components/PokemonListState/PokemonListState.styles";
+import ErrorState from "../../components/ErrorState/ErrorState";
 
 const PokemonDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const {
     data: pokemon,
@@ -51,9 +46,7 @@ const PokemonDetails = () => {
     return (
       <PageWrapper>
         <Content>
-          <Button size="lg" onClick={() => navigate(-1)}>
-            <Arrow>➜</Arrow> Back to List
-          </Button>
+          <BackToListButton />
           <PokemonDetailsSkeleton />
         </Content>
       </PageWrapper>
@@ -64,16 +57,11 @@ const PokemonDetails = () => {
     return (
       <PageWrapper>
         <Content>
-          <Button size="lg" onClick={() => navigate(-1)}>
-            <Arrow>➜</Arrow> Back to List
-          </Button>
-          <ErrorWrap>
-            <ErrorTitle>Unable to load Pokémon</ErrorTitle>
-            <ErrorMessage>
-              Something went wrong while fetching the details. Please retry.
-            </ErrorMessage>
-            <Button onClick={() => refetch()}>Retry</Button>
-          </ErrorWrap>
+          <BackToListButton />
+          <ErrorState
+            message="Something went wrong while fetching the details. Please retry."
+            onRetry={refetch}
+          />
         </Content>
       </PageWrapper>
     );
@@ -83,9 +71,7 @@ const PokemonDetails = () => {
   return (
     <PageWrapper>
       <Content>
-        <Button size="lg" onClick={() => navigate(-1)}>
-          <Arrow>➜</Arrow> Back to List
-        </Button>
+        <BackToListButton />
         <DetailsCard>
           <HeaderBar>
             <h1>
@@ -214,3 +200,13 @@ const PokemonDetails = () => {
 };
 
 export default PokemonDetails;
+
+const BackToListButton = () => {
+  const navigate = useNavigate();
+
+  return (
+    <Button size="lg" onClick={() => navigate(-1)}>
+      <Arrow aria-hidden="true">➜</Arrow> Back to List
+    </Button>
+  );
+};

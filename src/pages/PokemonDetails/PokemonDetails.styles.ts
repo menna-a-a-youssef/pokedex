@@ -48,7 +48,7 @@ export const Content = styled.div`
   padding: ${({ theme }) => `${theme.spacing.xxxl} ${theme.spacing.xxl}`};
 `;
 export const DetailsCard = styled.div`
-  max-width: 900px;
+  width: 900px;
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
