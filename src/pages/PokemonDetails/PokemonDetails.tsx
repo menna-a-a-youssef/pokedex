@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getPokemon } from "../../features/pokemon/api/pokemonApi";
-import Skeleton from "../../components/Skeleton/Skeleton";
+import PokemonDetailsSkeleton from "./PokemonDetailsSkeleton";
 import {
   PageWrapper,
   HeaderBar,
@@ -24,6 +24,14 @@ import Button from "../../components/Button/Button";
 import Chip from "../../components/Chip/Chip";
 import { pokemonTypeColors } from "../../features/pokemon/pokemonTypeColors";
 import StatBar from "../../components/StatBar/StatBar";
+import { getPokemonSprite } from "../../features/pokemon/utils";
+import placeholderImage from "../../assets/pokemon-placeholder.png";
+import {
+  ErrorWrap,
+  ErrorTitle,
+  ErrorMessage,
+} from "../../components/PokemonListState/PokemonListState.styles";
+
 const PokemonDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -43,7 +51,10 @@ const PokemonDetails = () => {
     return (
       <PageWrapper>
         <Content>
-          <Skeleton width="100%" height="400px" radius="12px" />
+          <Button size="lg" onClick={() => navigate(-1)}>
+            <Arrow>➜</Arrow> Back to List
+          </Button>
+          <PokemonDetailsSkeleton />
         </Content>
       </PageWrapper>
     );
@@ -53,25 +64,21 @@ const PokemonDetails = () => {
     return (
       <PageWrapper>
         <Content>
-          <div style={{ padding: "24px" }}>
-            <p>Failed to load Pokémon.</p>
-            <button onClick={() => refetch()}>Retry</button>
-          </div>
+          <Button size="lg" onClick={() => navigate(-1)}>
+            <Arrow>➜</Arrow> Back to List
+          </Button>
+          <ErrorWrap>
+            <ErrorTitle>Unable to load Pokémon</ErrorTitle>
+            <ErrorMessage>
+              Something went wrong while fetching the details. Please retry.
+            </ErrorMessage>
+            <Button onClick={() => refetch()}>Retry</Button>
+          </ErrorWrap>
         </Content>
       </PageWrapper>
     );
   }
-
-  const speciesId = pokemon.species?.url
-    ? pokemon.species.url.split("/").filter(Boolean).pop()
-    : null;
-
-  const sprite =
-    pokemon.sprites?.other?.["official-artwork"]?.front_default ||
-    pokemon.sprites?.front_default ||
-    (speciesId
-      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${speciesId}.png`
-      : undefined);
+  const sprite = getPokemonSprite(pokemon);
 
   return (
     <PageWrapper>
@@ -103,7 +110,14 @@ const PokemonDetails = () => {
 
           <LeftColumn>
             <SpriteWrapper>
-              <img src={sprite} alt={pokemon.name} />
+              <img
+                src={sprite}
+                alt={pokemon.name}
+                onError={(event) => {
+                  event.currentTarget.onerror = null;
+                  event.currentTarget.src = placeholderImage;
+                }}
+              />
             </SpriteWrapper>
 
             <TypesRow>
