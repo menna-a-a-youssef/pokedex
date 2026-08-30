@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import Header from "../../components/Header/Header";
 import PokemonGrid from "../../components/PokemonGrid/PokemonGrid";
-import PokemonListState from "../../components/PokemonListState/PokemonListState";
+import PokemonListSkeleton from "../../components/PokemonListSkeleton/PokemonListSkeleton";
 import { usePokemonInfiniteList } from "../../features/pokemon/hooks/usePokemonInfiniteList";
 import { mapPokemonListItem } from "../../features/pokemon/utils";
 import {
@@ -12,6 +12,7 @@ import {
   Spinner,
 } from "./PokemonInfinite.styles";
 import Button from "../../components/Button/Button";
+import ErrorState from "../../components/ErrorState/ErrorState";
 
 type PokemonInfiniteProps = {
   subtitle: string;
@@ -41,7 +42,7 @@ const PokemonInfinite = ({ subtitle }: PokemonInfiniteProps) => {
     return (
       <PageWrapper>
         <Header activeView="infinite" subtitle={subtitle} />
-        <PokemonListState variant="loading" count={8} />
+        <PokemonListSkeleton count={8} />
       </PageWrapper>
     );
   }
@@ -50,7 +51,7 @@ const PokemonInfinite = ({ subtitle }: PokemonInfiniteProps) => {
     return (
       <PageWrapper>
         <Header activeView="infinite" subtitle={subtitle} />
-        <PokemonListState variant="error" onRetry={() => refetch()} />
+        <ErrorState onRetry={refetch} />
       </PageWrapper>
     );
   }
@@ -66,14 +67,9 @@ const PokemonInfinite = ({ subtitle }: PokemonInfiniteProps) => {
             <span>Loading more Pokémon...</span>
           </LoadingRow>
         ) : isError && hasInitialData ? (
-          <PokemonListState
-            variant="error"
-            onRetry={() => fetchNextPage({ throwOnError: false })}
-          />
+          <ErrorState onRetry={() => fetchNextPage({ throwOnError: false })} />
         ) : hasNextPage ? (
-          <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
-            Load More
-          </Button>
+          <Button onClick={() => fetchNextPage()}>Load More</Button>
         ) : null}
 
         <CountText>Showing {totalLoaded} Pokémon</CountText>
