@@ -2,6 +2,10 @@
 
 A responsive React + TypeScript Pokédex application built with the [PokéAPI](https://pokeapi.co/).
 
+## Live Demo
+
+[View the deployed application](https://pokedex-kappa-virid.vercel.app/pokemon)
+
 ## Features
 
 - Browse Pokémon with pagination
